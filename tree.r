@@ -16,28 +16,6 @@ KEGG <- merge(data,ref, by = c("term","category","description"), all.x = TRUE)
 KEGG_rows <- KEGG[KEGG$category == "KEGG", ]
 
 
-normalize <- function(df, selected_columns) {
-  # Extract selected columns from the dataframe
-  selected_df <- df[, selected_columns]
-  
-  # Apply the normalization operation row-wise on the selected columns
-  normalized_df <- t(apply(selected_df, 1, function(row) {
-    max_value <- max(row)  # Find the maximum value in the current row
-    normalized_row <- (row / max_value) * 100  # Normalize each value in the row
-    return(normalized_row)
-  }))
-  
-  # Convert the transposed matrix back to a dataframe
-  normalized_df <- as.data.frame(normalized_df)
-  # Set the column names to match the original dataframe
-  colnames(normalized_df) <- selected_columns
-  
-  # Combine 'id', 'jds', and normalized columns
-  normalized_df_with_id_jds <- cbind(id_jds_df, normalized_df)
-  
-  # Return the dataframe with 'id', 'jds', and normalized columns
-  return(normalized_df_with_id_jds)
-}
 
 for (df in list(RCTM_rows, KEGG_rows)){
   # Get unique genes across all terms
