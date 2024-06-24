@@ -9,7 +9,7 @@ library(ggplot2)
 library(ggstar)
 
 
-df <- read.csv("/home/cnr/Desktop/THEWORK2803/10.Amyloidosis(heart)_H.sapiens/data_for_tree/tabs_first5_coppi_chord/TTR_control.csv")
+df <- read.csv("lumB_lumA.csv")
 all_genes <- unique(unlist(strsplit(gsub(" ", "", df$MergedGenes), ",")))
 # Create a binary matrix indicating gene presence for each term
 
